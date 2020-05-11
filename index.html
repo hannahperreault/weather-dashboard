@@ -5,20 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
     />
     <title>Document</title>
   </head>
   <body>
     <!--header with Weather Dashboard Text-->
     <header>
-      <nav>
-        <div class="nav-wrapper brand-logo center">
-          <h4>Weather Dashboard</h4>
-        </div>
-      </nav>
+      <div class="container alert alert-primary text-center" role="alert">
+        <h3>Weather Dashboard</h3>
+      </div>
     </header>
+
     <!--Left Side Search Form, and list of past searches-->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <form>
+            <div class="form-row align-items-center">
+              <div class="col-auto">
+                <label class="sr-only" for="inlineFormInput">Name</label>
+                <input
+                  type="text"
+                  class="form-control mb-2"
+                  id="searchField"
+                  placeholder="Search by City"
+                />
+              </div>
+              <div class="col-auto">
+                <button
+                  type="submit"
+                  class="btn btn-primary mb-2"
+                  id="searchButtom"
+                >
+                  Submit
+                </button>
+              </div>
+              <div class="card">
+                <div class="card-body text-muted">
+                  Portsmouth
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-body">
+              This is some text within a card body.
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-body">
+              This is some text within a card body.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!--Main div with current weather displayed-->
     <!--Lower main div with 5 day forcast-->
