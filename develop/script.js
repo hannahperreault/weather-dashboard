@@ -4,12 +4,24 @@ var cities = [];
 
 var date = moment().format("L");
 
+function hideRightDiv() {
+  $(".start").hide();
+}
+function unhideRightDiv() {
+  $(".start").show();
+}
+
+hideRightDiv();
+
 $("#search-button").on("click", function (event) {
   event.preventDefault();
+  unhideRightDiv();
   var city = $("#search-field").val().trim();
+  localStorage.setItem("current-city", city);
   cities.push(city);
   $("#display-city").text(city + ": " + date);
-  //   localStorage.setItem("");
+
+  //api call for current weather
   function displayCurrentWeather() {
     var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=d956114e4cd342e93a56df7db83a8d24&units=imperial`;
     $.ajax({
@@ -46,34 +58,50 @@ $("#search-button").on("click", function (event) {
       console.log(response.list[1].main.temp);
       $("#header-1").text(moment().add(1, "days").format("l"));
       $("#temp-1").text("Temp: " + response.list[1].main.temp + " °F");
-      $("#humidity-1").text("Humidity " + response.list[1].main.humidity + "%");
+      $("#humidity-1").text(
+        "Humidity: " + response.list[1].main.humidity + "%"
+      );
 
       $("#header-2").text(moment().add(2, "days").format("l"));
       $("#temp-2").text("Temp: " + response.list[2].main.temp + " °F");
-      $("#humidity-2").text("Humidity " + response.list[2].main.humidity + "%");
+      $("#humidity-2").text(
+        "Humidity: " + response.list[2].main.humidity + "%"
+      );
 
       $("#header-3").text(moment().add(3, "days").format("l"));
       $("#temp-3").text("Temp: " + response.list[3].main.temp + " °F");
-      $("#humidity-3").text("Humidity " + response.list[3].main.humidity + "%");
+      $("#humidity-3").text(
+        "Humidity: " + response.list[3].main.humidity + "%"
+      );
 
       $("#header-4").text(moment().add(4, "days").format("l"));
       $("#temp-4").text("Temp: " + response.list[4].main.temp + " °F");
-      $("#humidity-4").text("Humidity " + response.list[4].main.humidity + "%");
+      $("#humidity-4").text(
+        "Humidity: " + response.list[4].main.humidity + "%"
+      );
 
       $("#header-5").text(moment().add(5, "days").format("l"));
       $("#temp-5").text("Temp: " + response.list[5].main.temp + " °F");
-      $("#humidity-5").text("Humidity " + response.list[5].main.humidity + "%");
+      $("#humidity-5").text(
+        "Humidity: " + response.list[5].main.humidity + "%"
+      );
     });
   }
   displayForecast();
   addToHistory();
+
+  $(".city-history").on("click", function (event) {
+    event.preventDefault();
+    alert("clicked");
+  });
 });
+
 //this function adds each search item to the Search History div
 function addToHistory() {
   $("#history").empty();
   for (var i = 0; i < cities.length; i++) {
     var a = $("<button>");
-    a.addClass("city-history");
+    a.attr("class", "city-history");
     a.attr("data-name", cities[i]);
     a.text(cities[i]);
     $("#history").append(a);
@@ -84,6 +112,7 @@ function displayCurrentWeather() {
   city = $("<h2>");
   $("#current-weather".append(city));
 }
+
 //fucntion:
 //h1 element created with input and moment js date AND icon
 //appended to main div
@@ -91,4 +120,3 @@ function displayCurrentWeather() {
 //api call for weather: current weather and 5 day forecast
 //appended to both main divs
 //city name button created and added to second div
-//

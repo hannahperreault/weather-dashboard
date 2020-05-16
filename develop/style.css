@@ -1,5 +1,8 @@
 .city-history {
   display: block;
+  color: grey;
+  background-color: white;
+  border: none;
 }
 .list-group-item {
   color: white;
@@ -7,6 +10,5 @@
   font-size: 12px;
 }
 .list-header {
-    font-size: 15px;
-  } 
+  font-size: 15px;
 }
