@@ -11,7 +11,29 @@ function unhideRightDiv() {
   $(".start").show();
 }
 
+function lastSearchWeather() {
+  var lastSearch = localStorage.getItem("current-city");
+  $("#display-city").text(lastSearch + ": " + date);
+
+  console.log("current city " + lastSearch);
+  var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${lastSearch}&appid=d956114e4cd342e93a56df7db83a8d24&units=imperial`;
+  $.ajax({
+    url: queryURL,
+    method: "GET",
+  }).then(function (response) {
+    var currentTemp = response.main.temp;
+    $("#temperature").text("Temperature: " + currentTemp + " °F");
+    var currentHumidity = response.main.humidity;
+    $("#humidity").text("Humidity: " + currentHumidity + "%");
+    var currentWind = response.wind.speed;
+    $("#wind-speed").text("Wind Speed: " + currentWind + " MPH");
+    var lat = response.coord.lat;
+    var lon = response.coord.lon;
+  });
+}
+
 hideRightDiv();
+lastSearchWeather();
 
 $("#search-button").on("click", function (event) {
   event.preventDefault();
@@ -114,9 +136,5 @@ function displayCurrentWeather() {
 }
 
 //fucntion:
-//h1 element created with input and moment js date AND icon
-//appended to main div
-//def var city = input
-//api call for weather: current weather and 5 day forecast
-//appended to both main divs
-//city name button created and added to second div
+//need header and moment js to load with ls info
+//clicking history loads that weathr info again
